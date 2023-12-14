@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       
+    
+        </style>
+</head>
+<body>
+    <h1>This is a color changing screen</h1>
+    <div class="parent">
+        
+      <div>
+      
+      <input type="submit" id="start" value="start">
+      <input type="submit" id="end" value="end">
+      </div>
+
+    </div>
+</body>
+<script>
+      //let x=document.querySelector(".parent");
+      let x=null;
+     let s=document.querySelector('#start');
+    let e=document.querySelector('#end');
+    let fun=function (){
+        if(!x){
+            x=setInterval(foo,2000);
+        }
+        
+     
+    }
+    let foo=function(){
+        document.body.style.backgroundColor=cp();
+    }
+    
+    s.addEventListener('click',fun);
+   
+    let cp=()=>{
+        const c='0123456789ABCDEF';
+        let ans='#';
+        for(let i=0;i<6;i++){
+            ans+=c[Math.floor(Math.random()*16)];
+        }
+        return ans;
+    }
+    
+    let stop=function(){
+        clearInterval(x);
+        x=null;
+    }
+    e.addEventListener('click',stop)
+</script>
+</html>

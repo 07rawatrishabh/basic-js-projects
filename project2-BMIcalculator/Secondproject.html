@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            height: 200vh;
+            width: 100vw;
+            color: #fff;
+            background-color: #272727   }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+     <h1>BMI CALCULATOR</h1>
+     <form >
+    <p><label for="height">Height in cm : </label>
+    <input type="text" id="height"></p>
+    <p><label for="weight">Weight in Kg :</label>
+    <input type="text" id="weight"></p>
+     <button>Submit</button>
+     <br>
+    <br>
+     <div class="result"></div>
+     </form>
+
+
+
+    </div>
+</body>
+<script >
+    
+     let f=document.querySelector('form');
+     f.style.backgroundColor="orange";
+     f.addEventListener('submit',function(e){
+        e.preventDefault();
+        let w=parseInt(document.querySelector('#weight').value);
+        let h=parseInt(document.querySelector('#height').value);
+        let ans=document.querySelector('.result');
+  
+        ans.innerHTML=`<span>${(w/((h*h)/10000))}<span>`;
+    
+     })
+  
+</script>
+
+</html>

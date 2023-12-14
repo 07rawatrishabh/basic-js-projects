@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper{
+          background-color: #272727;
+          color: #fff;
+          height: 100vh;
+          width: 100vw;
+        }
+        .resultparas{
+            background-color: #272727;
+          color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Number Guessing game</h1>
+        <br><br>
+        <form class="form">
+         <label for="guessfield" id="guess">Guess a number</label>
+         <input type="text" id="guessfield" placeholder="submit Guess" class="guessfeild" >
+         <input type="submit" id="subt" value="submit Guess">
+        </form>
+        <div class="resultparas">
+            <p>Previous guesses <span class="guesses"></span></p>
+            <p>Guesses Remaining <span class="lastresult"></span></p>
+            <p class="loworhi"></p>
+        </div>
+    </div>
+</body>
+<script>
+ let num= Math.floor(Math.random()*100 +1);
+ let submit=document.querySelector('#subt');
+ let input=document.querySelector('#guessfield');
+ let preguess=document.querySelector('.guesses');
+ let lastres =document.querySelector('.lastresult');
+ let loh =document.querySelector('.loworhi');
+ let startover=document.querySelector('.resultparas');
+
+ const p=document.createElement('p');
+ let pg=[];
+ let c=10;
+ let playgame=true;
+ 
+ if(playgame){
+    submit.addEventListener('click',function(e){
+        e.preventDefault();
+        let x=parseInt(input.value);
+        validate(x);
+    })
+    
+ }
+
+  function validate(x){
+    if(x>0&&x<101&&(!isNaN(x))){
+        pg.push(x);
+        if(c<=1){
+         guessdisplay(x);
+        displaymessage(`game Over ,  Correct answer was ${num}`);
+        endgame();
+        }
+       else{
+        guessdisplay(x);
+        checkguess(x);
+       }
+        
+    }
+    else{
+        alert("plese enter a valid number")
+    }
+    
+  }
+ function checkguess(guess){
+   if(guess===num){
+    displaymessage(`You won`);
+    endgame();
+   }
+   else if(guess>num){
+    displaymessage(`too high`);
+   }
+   else{
+    displaymessage(`too low`);
+   }
+ }
+
+ function displaymessage(message){
+   loh.innerHTML=`<h2>${message}</h2>`;
+}
+
+function guessdisplay(guess){
+   input.value='';
+   preguess.innerHTML+=`${guess} `;
+   c--;
+   lastres.innerHTML=`${c}`;     
+
+}
+
+function newgame(){
+let g=document.querySelector('#newg');
+g.addEventListener('click',function(e){
+ 
+  c=10;
+  num=Math.floor(Math.random()*100 +1);
+  preguess.innerHTML =` `;
+  lastres.innerHTML=`${c}`; 
+  startover.removeChild(p);
+  pg =[ ];
+  displaymessage(" ")
+  input.removeAttribute('disabled');
+  startover.removeChild(p);
+  playgame=true;
+})
+}
+ 
+function endgame(){
+    input.value='';
+    input.setAttribute('disabled','');
+    p.classList.add('button');
+    p.innerHTML=`<h2 id="newg">Start new Game<h2>`;
+        startover.appendChild(p);
+        playgame=false;
+        newgame();
+
+}
+
+ 
+
+
+
+
+
+
+
+</script>
+</html>
